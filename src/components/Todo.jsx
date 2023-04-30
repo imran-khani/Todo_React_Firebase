@@ -23,7 +23,7 @@ const database = firebase.database();
 
 const Todo = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+
   const [data, setData] = useState([]);
 
   // Load the data from Firebase when the component mounts
@@ -42,8 +42,8 @@ const Todo = () => {
   }, []);
 
   const addData = () => {
-    let obj = { name, email };
-    if (!name || !email) {
+    let obj = { name };
+    if (!name) {
       return null;
     } else {
       const newData = [...data, obj];
@@ -54,11 +54,9 @@ const Todo = () => {
       newItemRef.set({
         id: newItemKey, // set the unique identifier as the "id" property
         name,
-        email,
       });
 
       setName("");
-      setEmail("");
       obj.id = newItemKey; // add the id property to the object
       return obj;
     }
@@ -73,33 +71,22 @@ const Todo = () => {
             className="w-[300px]"
             onChange={(e) => setName(e.target.value)}
             id="standard"
-            label="Name"
+            label="Do something"
             variant="standard"
-          />
-          <TextField
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-[300px]"
-            id="standard"
-            label="Email"
-            variant="standard"
-            type="email"
           />
           <Button
             variant="contained"
             onClick={addData}
-            // disable button if the email value is less than 1 character
-            disabled={name.length < 1 || email.length < 1}
+            disabled={name.length < 1}
             className="disabled:bg-slate-600"
           >
             <AddIcon />
           </Button>
         </div>
       </div>
-      <div className="mx-auto ms-auto mt-5 grid  max-w-6xl grid-cols-3 p-5 text-center shadow-md">
-        <span>Name</span>
-        <span>Email</span>
-        <span>Delete</span>
+      <div className="mx-auto  mt-5 grid bg-slate-100 rounded-lg text-slate-800  max-w-6xl grid-cols-2 p-5 text-center shadow-sm">
+        <span className="text-xl font-bold">Name</span>
+        <span className="text-xl font-bold">Remove</span>
       </div>
       {loading ? (
         <div className="flex h-40 items-center justify-center">
@@ -114,7 +101,7 @@ const Todo = () => {
         <>
           {data.length > 0 ? (
             data.map((item, index) => {
-              const { name, email, id } = item;
+              const { name, id } = item;
               return (
                 <Fields
                   data={data}
@@ -122,7 +109,6 @@ const Todo = () => {
                   index={index}
                   id={id}
                   name={name}
-                  email={email}
                   setData={setData}
                   database={database}
                 />

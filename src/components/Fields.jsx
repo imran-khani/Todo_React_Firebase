@@ -3,8 +3,8 @@ import { Button } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 const Fields = (props) => {
-  let { data, index, id, name, email, setData, database } = props;
-  
+  let { data, index, id, name, setData, database } = props;
+
   const delItem = (index) => {
     const newData = [...data];
     newData.splice(index, 1);
@@ -16,9 +16,8 @@ const Fields = (props) => {
 
   return (
     <div>
-      <div className="mx-auto ms-auto mt-5 grid  max-w-6xl grid-cols-3 p-5 text-center shadow-md">
+      <div className="mx-auto ms-auto mt-5 grid  max-w-6xl grid-cols-2 p-5 text-center shadow-sm">
         <span>{name}</span>
-        <span>{email}</span>
         <span>
           <Button
             onClick={() => delItem(index)}
