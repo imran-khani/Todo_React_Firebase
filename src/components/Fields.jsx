@@ -3,8 +3,10 @@ import { Button } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 const Fields = (props) => {
+  // Destructuring
   let { data, index, id, name, email, setData, database } = props;
   
+  // Delete Button
   const delItem = (index) => {
     const newData = [...data];
     newData.splice(index, 1);
