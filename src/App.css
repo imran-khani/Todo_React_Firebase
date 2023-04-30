@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+padding: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
